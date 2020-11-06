@@ -8,7 +8,10 @@
 
 public class Driver {
     public static void main(String[] args)  {
+    	
+    	
         MerkleTree MT = new MerkleTree();
+    	System.out.println("Hello");
 
     }
 }
