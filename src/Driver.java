@@ -6,9 +6,18 @@
  *  giving us a new value at the root. */
 
 
+import java.io.File;
+
 public class Driver {
     public static void main(String[] args)  {
-        MerkleTree MT = new MerkleTree();
+        File directoryPath = new File("projectFiles");
+        String contents [] = directoryPath.list();
+
+        for (int i = 0; i < contents.length; i++) {
+            TreeFile file = new TreeFile("projectFiles/" + contents[i]);
+        }
+
+
 
     }
 }
