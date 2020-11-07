@@ -6,8 +6,10 @@
 ** Section: 502, 501
 ** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
 **
-**   This file contains the main driver program for FinalProject.
-*
+**   This class extends Node, and is used for the inner
+**	 nodes of the MerkleTree (the nodes that contain the
+**	 hash values)
+**
 ***********************************************/
 
 public class InnerNode extends Node{
