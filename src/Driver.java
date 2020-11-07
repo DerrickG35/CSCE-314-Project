@@ -16,7 +16,16 @@ public class Driver {
         for (int i = 0; i < contents.length; i++) {
             TreeFile file = new TreeFile("projectFiles/" + contents[i]);
         }
-
+        
+        
+        System.out.println(contents);
+        System.out.println(contents.length);
+        MerkleTree current = new MerkleTree(contents);
+        System.out.println(current.getDepth());
+        System.out.println(current.log2(5));
+        
+        System.out.println();
+        System.out.println(current.treeSize(current.root));
 
 
     }

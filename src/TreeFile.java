@@ -12,10 +12,11 @@ public class TreeFile {
 	
 	public TreeFile(String path) {
 		this.path = path;
-		hash = createHash();
 	}
 	
+	
 	protected String getHash() { return hash; } ;
+	
 	
 	private String createHash() {
 		File file = new File(path);

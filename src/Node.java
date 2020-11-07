@@ -3,13 +3,15 @@ public class Node {
     String key;
     Node left;
     Node right;
-    File file;
+    TreeFile file;
+   
 
-    public Node(String key) {
+    public Node() {
         this.key = key;
         this.left = null;
         this.right = null;
         this.file = null;
     }
+    
     
 }
