@@ -2,15 +2,15 @@
 public class MerkleTree {
 	
 	
-    public Node root;
-    private int depth;
+    private InnerNode root;
     private String paths[];
+    private int depth;
     private int cFileIndex;
     
     
     
     public MerkleTree(String[] paths) {
-        this.root = new Node();
+        this.root = new InnerNode();
         this.paths = paths;
         this.depth = log2(paths.length);
         this.cFileIndex = 0;
@@ -19,26 +19,30 @@ public class MerkleTree {
     }
     
      
-    private void buildTree(int depth, Node current) {
+    private void buildTree(int depth, InnerNode current) {
     	
     	
     	if( this.depth == depth) {
     		
     		if (cFileIndex >= paths.length) {
-    			current.file = new TreeFile(paths[paths.length-1]);
+    			current.setFile(new TreeFile(paths[paths.length-1]));
     		}
     		else {
-	    		current.file = new TreeFile(paths[cFileIndex]);
+	    		current.setFile(new TreeFile(paths[cFileIndex]));
 	    		cFileIndex += 1;
     		}
     		
     	}
     	else {
     		
-    		current.left = new Node();
-    		current.right = new Node();
-    		buildTree(depth+1, current.left);
-        	buildTree(depth+1, current.right);
+    		current.setLeft(new InnerNode());
+    		current.setRight(new InnerNode());
+    		
+    		buildTree(depth+1, current.getLeft());
+        	buildTree(depth+1, current.getRight());
+        	
+        	// Can add hashes here
+        	
     	}
     	
     }
@@ -51,18 +55,23 @@ public class MerkleTree {
     	
     }
     
+    public InnerNode root() {
+    	return root;
+    }
+    
     
     public int getDepth() { return depth; } ;
     
+    
     // count how many nodes in the tree
-    public int treeSize(Node node) {
+    public int treeSize(InnerNode node) {
     	
-    	if (node.file != null) {
-    		System.out.println(node.file);
+    	if (node.getFile() != null) {
+    		System.out.println(node.getFile());
     		return 1;
     	}
     	else {
-    		return 1 + treeSize(node.left) + treeSize(node.right);
+    		return 1 + treeSize(node.getLeft()) + treeSize(node.getRight());
     	}
     	
     }

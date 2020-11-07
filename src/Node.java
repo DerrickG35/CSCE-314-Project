@@ -11,11 +11,11 @@ public class Node {
     }
 
     protected String createHash(TreeFile file) {
-
+    	
     }
 
     protected String createHash(String hash) {
-
+    	
     }
 
     public Node() {

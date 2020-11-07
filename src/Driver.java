@@ -24,7 +24,7 @@ public class Driver {
         System.out.println(current.getDepth());
         
         System.out.println();
-        System.out.println(current.treeSize(current.root));
+        System.out.println(current.treeSize(current.root()));
 
 
     }
