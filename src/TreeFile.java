@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 public class TreeFile {
 	
 	private static Scanner sc;
-	
 	private String hash;
 	private String path;
 	

@@ -43,14 +43,16 @@ public class MerkleTree {
     	
     }
     
-    public int getDepth() { return depth; } ;
     
-    public int log2(int N) {
+    private int log2(int N) {
 
     	int result = (int) Math.ceil((Math.log(N) / Math.log(2)));
     	return result;
     	
     }
+    
+    
+    public int getDepth() { return depth; } ;
     
     // count how many nodes in the tree
     public int treeSize(Node node) {
