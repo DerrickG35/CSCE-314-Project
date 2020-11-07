@@ -1,3 +1,14 @@
+/*****************************************
+** File:    MerkleTree.java
+** Project: CSCE 314 Final Project, Fall 2020
+** Author:  Derrick Galindo, Manuel Trevino
+** Date:    11/7/2020
+** Section: 502, 501
+** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
+**
+**  Description...
+*
+***********************************************/
 
 public class MerkleTree {
 	
@@ -19,6 +30,8 @@ public class MerkleTree {
     }
     
      
+    // buildTree
+    // given the root, will create all the branches need for the files
     private void buildTree(int depth, InnerNode current) {
     	
     	
@@ -48,6 +61,7 @@ public class MerkleTree {
     }
     
     
+    // log base 2 operator
     private int log2(int N) {
 
     	int result = (int) Math.ceil((Math.log(N) / Math.log(2)));
@@ -55,15 +69,18 @@ public class MerkleTree {
     	
     }
     
+    
+    // return the root of the Merkle Tree
     public InnerNode root() {
     	return root;
     }
     
     
+    // returns the depth of the MerkleTree
     public int getDepth() { return depth; } ;
     
     
-    // count how many nodes in the tree
+    // count how many InnerNodes in the tree
     public int treeSize(InnerNode node) {
     	
     	if (node.getFile() != null) {
