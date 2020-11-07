@@ -22,7 +22,6 @@ public class Driver {
         System.out.println(contents.length);
         MerkleTree current = new MerkleTree(contents);
         System.out.println(current.getDepth());
-        System.out.println(current.log2(5));
         
         System.out.println();
         System.out.println(current.treeSize(current.root));
