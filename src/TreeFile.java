@@ -16,6 +16,7 @@ public class TreeFile extends Node {
 	public Path getPath() {
 		return path;
 	}
+	 
 
 	public void setPath(Path path) {
 		this.path = path;

@@ -1,5 +1,5 @@
 
-public class InnerNode {
+public class InnerNode extends Node{
 	
 	private InnerNode left;
 	private InnerNode right;
@@ -25,6 +25,14 @@ public class InnerNode {
 	
 	public InnerNode getRight() {
 		return right;
+	}
+	
+	public void setFile(TreeFile file) {
+		this.file = file;
+	}
+	
+	public TreeFile getFile() {
+		return file;
 	}
 	
 	
