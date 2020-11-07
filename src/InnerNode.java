@@ -10,7 +10,7 @@
 *
 ***********************************************/
 
-public class InnerNode extends Node{
+public class InnerNode extends Node {
 	
 	private InnerNode left;
 	private InnerNode right;

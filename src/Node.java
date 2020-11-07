@@ -28,6 +28,17 @@ public class Node {
         this.key = key;
     }
 
+
+    //--------------------------------------------------------------
+    // Name: createHash
+    // PreCondition:  A valid Path to locate a file
+    // PostCondition: Returns the hash of the file at the given Path
+    //---------------------------------------------------------------
+
+    /* This method initializes the MessageDigest class to access MD5 hashing. The given path
+       is then utilized to obtain the files ByteArray for updating MessageDigest. Digest then returns
+       the hash computation and which is then converted to a String to in order to be stored in Node's key
+       attribute. */
     protected void createHash(Path path) throws IOException, NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] fileData = Files.readAllBytes(path);
@@ -41,6 +52,15 @@ public class Node {
         
         
         this.setKey(fileHash.toString());
+    }
+
+    //-------------------------------------------------------------------------------------
+    // Name: createHash
+    // PreCondition:  A non-null String that is the concatenated hash of two children nodes
+    // PostCondition: Returns the hash of childrenHash for the parent node
+    //-------------------------------------------------------------------------------------
+
+    protected void createParentHash(String childrenHash) {
 
     }
 

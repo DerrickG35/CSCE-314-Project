@@ -19,12 +19,12 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class TreeFile extends Node {
-	
-	private static Scanner sc;
+
 	private Path path;
-	
+
 	public TreeFile(String path) {
-		
+
+		// Gets the entire String path and is then converted to a Path object
 		path = "projectFiles/" + path;
 		this.path = Path.of(path);
 		

@@ -18,20 +18,15 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         File directoryPath = new File("projectFiles");
-        String contents [] = directoryPath.list();
+        String[] contents = directoryPath.list();
 
-//        for (int i = 0; i < contents.length; i++) {
-//            TreeFile file = new TreeFile("projectFiles/" + contents[i]);
-//            
-//        }
-        
-        
-        
+
         MerkleTree current = new MerkleTree(contents);
         System.out.println(current.treeSize(current.root()));
 
