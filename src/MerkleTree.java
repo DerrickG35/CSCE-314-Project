@@ -10,8 +10,11 @@ import java.security.NoSuchAlgorithmException;
 ** Section: 502, 501
 ** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
 **
-**  Description...
-*
+**  This file contains the MerkleTree data structure.
+**	given the paths of all the files, it constructs
+**	a perfect binary tree with TreeFile nodes connected
+**	at the leaves of the Merkle Tree.
+**
 ***********************************************/
 
 public class MerkleTree {
@@ -24,6 +27,10 @@ public class MerkleTree {
     
     
     
+    //-------------------------------------------------------
+    // Name: MerkleTree, constructor
+    // PostCondition: constructs a perfect binary tree
+    //---------------------------------------------------------
     public MerkleTree(String[] paths) {
         this.root = new InnerNode();
         this.paths = paths;
@@ -34,32 +41,44 @@ public class MerkleTree {
     }
     
      
-    // buildTree
-    // given the root, will create all the branches need for the files
+    //-------------------------------------------------------
+    // Name: buildTree
+    // PostCondition: given required depth, and root node
+    // 				  constructs the merkleTree
+    //---------------------------------------------------------
     private void buildTree(int depth, InnerNode current) {
     	
+    	// if required depth reach, attach the TreeFile nodes to InnerNodes
     	if( this.depth == depth) {
     		
+    		// if all files already attached, then continue attaching the last one.
+    		// else attach the correct file and move index by 1
     		if (cFileIndex >= paths.length) {
+    			
     			current.setFile(new TreeFile(paths[paths.length-1]));
     		}
     		else {
+    		
 	    		current.setFile(new TreeFile(paths[cFileIndex]));
 	    		cFileIndex += 1;
     		}
     		
+    		// set InnerNode key to TreeFile's key
     		current.setKey(current.getFile().getKey());
     		
     	}
     	else {
     		
-    		
+    		// if not at the desired depth
+    		// create a left and right InnerNode
     		current.setLeft(new InnerNode());
     		current.setRight(new InnerNode());
     		
+    		// recursively do down the left subtree then right until reaching needed depth
     		buildTree(depth+1, current.getLeft());
         	buildTree(depth+1, current.getRight());
         	
+        	// set parent InnerNode key to the keys of the children
         	current.setKey(current.getLeft().getKey() + current.getRight().getKey());
         	
         	
@@ -89,7 +108,12 @@ public class MerkleTree {
     
     // count how many InnerNodes in the tree
     public int treeSize(InnerNode node) {
+    	
+    	// currently added to show that hash values are being stored.
     	System.out.println(node.getKey());
+    	System.out.println();
+    	
+    	
     	if (node.getFile() != null) {
     		return 1;
     	}

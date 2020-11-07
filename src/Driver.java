@@ -18,16 +18,25 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         File directoryPath = new File("projectFiles");
-        String[] contents = directoryPath.list();
+        String contents [] = directoryPath.list();
 
 
+
+
+        // building Merkle Tree
         MerkleTree current = new MerkleTree(contents);
+
+
+        System.out.println("Printing out the concatenated hashes in pre Order traversal starting at the root");
+        System.out.println("There are currently 8 files, so 15 nodes total");
+        System.out.println();
+
+        // not final hash values
         System.out.println(current.treeSize(current.root()));
 
 
