@@ -7,24 +7,31 @@
 
 
 import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class Driver {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         File directoryPath = new File("projectFiles");
         String contents [] = directoryPath.list();
 
         for (int i = 0; i < contents.length; i++) {
             TreeFile file = new TreeFile("projectFiles/" + contents[i]);
+            try {
+                String hash = file.createHash(file.getPath());
+                System.out.println(hash);
+            }
+            catch(NoSuchAlgorithmException | IOException e) {}
         }
         
         
-        System.out.println(contents);
-        System.out.println(contents.length);
-        MerkleTree current = new MerkleTree(contents);
-        System.out.println(current.getDepth());
-        
-        System.out.println();
-        System.out.println(current.treeSize(current.root));
+//        System.out.println(contents);
+//        System.out.println(contents.length);
+//        MerkleTree current = new MerkleTree(contents);
+//        System.out.println(current.getDepth());
+//
+//        System.out.println();
+//        System.out.println(current.treeSize(current.root));
 
 
     }
