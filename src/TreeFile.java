@@ -3,32 +3,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 
-public class TreeFile {
+public class TreeFile extends Node {
 	
 	private static Scanner sc;
-	
-	private String hash;
 	private String path;
 	
 	public TreeFile(String path) {
 		this.path = path;
 	}
-	
-	
-	protected String getHash() { return hash; } ;
-	
-	
-	private String createHash() {
-		File file = new File(path);
-		
-		try {
-			sc = new Scanner(file);
-			
-		}
-		catch (FileNotFoundException y) {
-			y.printStackTrace();
-		}
-		
-		return "temporary";
-	}
+
 }

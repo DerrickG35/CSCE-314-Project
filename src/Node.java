@@ -1,9 +1,6 @@
 public class Node {
 	
-    String key;
-    Node left;
-    Node right;
-    TreeFile file;
+    private String key;
 
     public String getKey() {
         return key;
@@ -13,34 +10,16 @@ public class Node {
         this.key = key;
     }
 
-    public Node getLeft() {
-        return left;
+    protected String createHash(TreeFile file) {
+
     }
 
-    public void setLeft(Node left) {
-        this.left = left;
+    protected String createHash(String hash) {
+
     }
-
-    public Node getRight() {
-        return right;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
-    }
-
-
-    public Node(TreeFile file) {
-        this.key = null;
-        this.left = null;
-        this.right = null;
-    }
-
 
     public Node() {
-        this.key = key;
-        this.left = null;
-        this.right = null;
+        this.key = null;
     }
     
 }
