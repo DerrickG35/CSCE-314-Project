@@ -13,7 +13,9 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 
 
 public class TreeFile extends Node {
@@ -22,7 +24,15 @@ public class TreeFile extends Node {
 	private Path path;
 	
 	public TreeFile(String path) {
+		
+		path = "projectFiles/" + path;
 		this.path = Path.of(path);
+		
+		try {
+			createHash(this.path);
+		} catch (NoSuchAlgorithmException | IOException e) {
+			System.out.println("failing");
+		} 
 	}
 
 	public Path getPath() {

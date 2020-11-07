@@ -28,7 +28,7 @@ public class Node {
         this.key = key;
     }
 
-    protected String createHash(Path path) throws IOException, NoSuchAlgorithmException {
+    protected void createHash(Path path) throws IOException, NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] fileData = Files.readAllBytes(path);
         md.update(fileData);
@@ -38,8 +38,9 @@ public class Node {
         for (int i = 0; i < digest.length; i++) {
             fileHash.append(Integer.toHexString(digest[i] & 0xff).toString());
         }
-
-        return fileHash.toString();
+        
+        
+        this.setKey(fileHash.toString());
 
     }
 

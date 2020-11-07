@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
+
 /*****************************************
 ** File:    MerkleTree.java
 ** Project: CSCE 314 Final Project, Fall 2020
@@ -34,7 +38,6 @@ public class MerkleTree {
     // given the root, will create all the branches need for the files
     private void buildTree(int depth, InnerNode current) {
     	
-    	
     	if( this.depth == depth) {
     		
     		if (cFileIndex >= paths.length) {
@@ -45,8 +48,11 @@ public class MerkleTree {
 	    		cFileIndex += 1;
     		}
     		
+    		current.setKey(current.getFile().getKey());
+    		
     	}
     	else {
+    		
     		
     		current.setLeft(new InnerNode());
     		current.setRight(new InnerNode());
@@ -54,7 +60,8 @@ public class MerkleTree {
     		buildTree(depth+1, current.getLeft());
         	buildTree(depth+1, current.getRight());
         	
-        	// Can add hashes here
+        	current.setKey(current.getLeft().getKey() + current.getRight().getKey());
+        	
         	
     	}
     	
@@ -82,9 +89,8 @@ public class MerkleTree {
     
     // count how many InnerNodes in the tree
     public int treeSize(InnerNode node) {
-    	
+    	System.out.println(node.getKey());
     	if (node.getFile() != null) {
-    		System.out.println(node.getFile());
     		return 1;
     	}
     	else {

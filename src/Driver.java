@@ -25,23 +25,15 @@ public class Driver {
         File directoryPath = new File("projectFiles");
         String contents [] = directoryPath.list();
 
-        for (int i = 0; i < contents.length; i++) {
-            TreeFile file = new TreeFile("projectFiles/" + contents[i]);
-            try {
-                String hash = file.createHash(file.getPath());
-                System.out.println(hash);
-            }
-            catch(NoSuchAlgorithmException | IOException e) {}
-        }
+//        for (int i = 0; i < contents.length; i++) {
+//            TreeFile file = new TreeFile("projectFiles/" + contents[i]);
+//            
+//        }
         
         
-//        System.out.println(contents);
-//        System.out.println(contents.length);
-//        MerkleTree current = new MerkleTree(contents);
-//        System.out.println(current.getDepth());
-//
-//        System.out.println();
-//        System.out.println(current.treeSize(current.root));
+        
+        MerkleTree current = new MerkleTree(contents);
+        System.out.println(current.treeSize(current.root()));
 
 
     }
