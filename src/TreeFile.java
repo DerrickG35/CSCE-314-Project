@@ -6,7 +6,9 @@
 ** Section: 502, 501
 ** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
 **
-**   This file contains the main driver program for FinalProject.
+**   This file contains the TreeFile objects that serve as the outer nodes of our Merkle Tree.
+ *   TreeFile is inherited from node, which allows us to create a hash of the file at the path
+ *   passed to this object.
 *
 ***********************************************/
 

@@ -6,8 +6,10 @@
 ** Section: 502, 501
 ** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
 **
-**   This file contains the main driver program for FinalProject.
-*
+**   This file contains the structure of our Nodes used in the Merkle tree.
+ *   Node serves as a superclass to the subclasses TreeFile and InnerNode.
+ *   It allows the subclasses to use the createHash function depending on
+ *   what type of node is used.
 ***********************************************/
 
 import java.io.IOException;
