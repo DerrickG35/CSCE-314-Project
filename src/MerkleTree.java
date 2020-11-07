@@ -18,8 +18,6 @@ public class MerkleTree {
         buildTree(0,root);
     }
     
-    
-    // get the maximum needed depth
      
     private void buildTree(int depth, Node current) {
     	
@@ -42,15 +40,16 @@ public class MerkleTree {
     		buildTree(depth+1, current.left);
         	buildTree(depth+1, current.right);
     	}
-    
+    	
     }
     
     public int getDepth() { return depth; } ;
     
     public int log2(int N) {
-    	
+
     	int result = (int) Math.ceil((Math.log(N) / Math.log(2)));
     	return result;
+    	
     }
     
     // count how many nodes in the tree

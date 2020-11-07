@@ -13,5 +13,4 @@ public class Node {
         this.file = null;
     }
     
-    
 }
