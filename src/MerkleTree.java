@@ -79,7 +79,12 @@ public class MerkleTree {
         	buildTree(depth+1, current.getRight());
         	
         	// set parent InnerNode key to the keys of the children
-        	current.setKey(current.getLeft().getKey() + current.getRight().getKey());
+        	try {
+				current.createParentHash((current.getLeft().getKey() + current.getRight().getKey()));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	
         	
     	}

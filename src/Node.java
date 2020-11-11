@@ -74,8 +74,7 @@ public class Node {
             parentHash.append(Integer.toHexString(digest[i] & 0xff));
         }
 
-        this.setKey(Long.toString(parentHash.toString().hashCode()));
-        System.out.println();
+        this.setKey(parentHash.toString());
     }
 
     public Node() {
