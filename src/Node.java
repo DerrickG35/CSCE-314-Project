@@ -50,7 +50,7 @@ public class Node {
         StringBuilder fileHash = new StringBuilder();
 
         for (int i = 0; i < digest.length; i++) {
-            fileHash.append(Integer.toHexString(digest[i] & 0xff).toString());
+            fileHash.append(Integer.toHexString(digest[i] & 0xff));
         }
         
         
@@ -63,15 +63,15 @@ public class Node {
     // PostCondition: Returns the hash of childrenHash for the parent node
     //-------------------------------------------------------------------------------------
 
-    protected void createParentHash(long childrenHash) throws NoSuchAlgorithmException {
+    protected void createParentHash(String childrenHash) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
-        ByteBuffer byteBuffer = ByteBuffer.allocate(Long.BYTES).putLong(childrenHash);
-        md.update(byteBuffer.array());
+        byte[] byteArray = childrenHash.getBytes();
+        md.update(byteArray);
         byte[] digest = md.digest();
         StringBuilder parentHash = new StringBuilder();
 
         for (int i = 0; i < digest.length; i++) {
-            parentHash.append(Integer.toHexString(digest[i] & 0xff).toString());
+            parentHash.append(Integer.toHexString(digest[i] & 0xff));
         }
 
         this.setKey(parentHash.toString());
