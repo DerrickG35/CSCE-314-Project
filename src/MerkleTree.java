@@ -83,7 +83,14 @@ public class MerkleTree {
         	String rightHash = current.getRight().getKey();
         	
         	long result = Long.parseLong(leftHash) + Long.parseLong(rightHash);
-        	current.createParentHash(Long.toString(result));
+        	
+        	
+        	try {
+				current.createParentHash(result);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	
         	
     	}
