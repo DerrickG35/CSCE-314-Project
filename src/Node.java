@@ -62,9 +62,6 @@ public class Node {
     // PostCondition: Returns the hash of childrenHash for the parent node
     //-------------------------------------------------------------------------------------
 
-    protected void createParentHash(String childrenHash) {
-
-    }
 
     public Node() {
         this.key = null;

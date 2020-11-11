@@ -64,7 +64,7 @@ public class MerkleTree {
     		}
     		
     		// set InnerNode key to TreeFile's key
-    		current.setKey(current.getFile().getKey());
+    		current.setKey(Integer.toString(current.getFile().getKey().hashCode()));
     		
     	}
     	else {
@@ -79,7 +79,11 @@ public class MerkleTree {
         	buildTree(depth+1, current.getRight());
         	
         	// set parent InnerNode key to the keys of the children
-        	current.setKey(current.getLeft().getKey() + current.getRight().getKey());
+        	String leftHash = current.getLeft().getKey();
+        	String rightHash = current.getRight().getKey();
+        	
+        	long result = Long.parseLong(leftHash) + Long.parseLong(rightHash);
+        	current.createParentHash(Long.toString(result));
         	
         	
     	}
