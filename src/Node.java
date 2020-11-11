@@ -13,6 +13,7 @@
 ***********************************************/
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -62,8 +63,18 @@ public class Node {
     // PostCondition: Returns the hash of childrenHash for the parent node
     //-------------------------------------------------------------------------------------
 
-    protected void createParentHash(String childrenHash) {
+    protected void createParentHash(long childrenHash) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        ByteBuffer byteBuffer = ByteBuffer.allocate(Long.BYTES).putLong(childrenHash);
+        md.update(byteBuffer.array());
+        byte[] digest = md.digest();
+        StringBuilder parentHash = new StringBuilder();
 
+        for (int i = 0; i < digest.length; i++) {
+            parentHash.append(Integer.toHexString(digest[i] & 0xff).toString());
+        }
+
+        this.setKey(parentHash.toString());
     }
 
     public Node() {
