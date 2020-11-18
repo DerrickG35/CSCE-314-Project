@@ -24,14 +24,10 @@ import java.util.Arrays;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        File directoryPath = new File("projectFiles");
-        String contents [] = directoryPath.list();
-        Arrays.sort(contents);
+        
 
         // building Merkle Tree: taking the hash of the initial files
-        MerkleTree remote = new MerkleTree(contents);
-        MerkleTree local = new MerkleTree(contents);
-        GitRepository gitRepository = new GitRepository(remote, local, directoryPath);
+        GitRepository gitRepository = new GitRepository();
 
 
 
@@ -40,7 +36,6 @@ public class Driver {
         System.out.println();
 
         // Initial hash values stored in Merkle Tree
-        System.out.println(remote.treeSize(remote.root()));
 
         // Editing a file and rehashing keys in the Merkle Tree
 
@@ -54,10 +49,10 @@ public class Driver {
             e.printStackTrace();
         }
 
-        local = new MerkleTree(contents);
+        
 
 
-        System.out.println(local.treeSize(local.root()));
+        // System.out.println(local.treeSize(local.root()));
 
 
         // Deleting a file
