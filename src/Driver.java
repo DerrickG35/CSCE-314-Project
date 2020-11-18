@@ -20,17 +20,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         File directoryPath = new File("projectFiles");
         String contents [] = directoryPath.list();
-
-
-
+        Arrays.sort(contents);
 
         // building Merkle Tree: taking the hash of the initial files
         MerkleTree remote = new MerkleTree(contents);
+        MerkleTree local = new MerkleTree(contents);
+        GitRepository gitRepository = new GitRepository(remote, local, directoryPath);
+
 
 
         System.out.println("Printing out the concatenated hashes in pre Order traversal starting at the root");
@@ -41,6 +43,7 @@ public class Driver {
         System.out.println(remote.treeSize(remote.root()));
 
         // Editing a file and rehashing keys in the Merkle Tree
+
         try {
             File editedFile = new File("projectFiles/a.txt");
             FileWriter fileWriter = new FileWriter(editedFile, true);
@@ -51,7 +54,9 @@ public class Driver {
             e.printStackTrace();
         }
 
-        MerkleTree local = new MerkleTree(contents);
+        local = new MerkleTree(contents);
+
+
         System.out.println(local.treeSize(local.root()));
 
 
