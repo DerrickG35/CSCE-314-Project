@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Node {
+abstract class Node {
 	
     private String key;
 
