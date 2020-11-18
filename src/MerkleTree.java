@@ -60,6 +60,7 @@ public class MerkleTree {
     		else {
     		
 	    		current.setFile(new TreeFile(paths[cFileIndex]));
+	    		System.out.println(paths[cFileIndex]);
 	    		cFileIndex += 1;
     		}
     		
