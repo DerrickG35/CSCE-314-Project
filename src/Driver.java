@@ -17,6 +17,7 @@
  *  giving us a new value at the root. */
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,16 +29,36 @@ public class Driver {
 
 
 
-        // building Merkle Tree
-        MerkleTree current = new MerkleTree(contents);
+        // building Merkle Tree: taking the hash of the initial files
+        MerkleTree remote = new MerkleTree(contents);
 
 
         System.out.println("Printing out the concatenated hashes in pre Order traversal starting at the root");
         System.out.println("There are currently 8 files, so 15 nodes total");
         System.out.println();
 
-        // not final hash values
-        System.out.println(current.treeSize(current.root()));
+        // Initial hash values stored in Merkle Tree
+        System.out.println(remote.treeSize(remote.root()));
+
+        // Editing a file and rehashing keys in the Merkle Tree
+        try {
+            File editedFile = new File("projectFiles/a.txt");
+            FileWriter fileWriter = new FileWriter(editedFile, true);
+            fileWriter.write("\nCSCE 314 Project");
+            fileWriter.close();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        MerkleTree local = new MerkleTree(contents);
+        System.out.println(local.treeSize(local.root()));
+
+
+        // Deleting a file
+
+        // Adding a file
+
 
 
     }
