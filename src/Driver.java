@@ -30,7 +30,7 @@ public class Driver {
         GitRepository gitRepository = new GitRepository();
 
 
-
+        
         System.out.println("Printing out the concatenated hashes in pre Order traversal starting at the root");
         System.out.println("There are currently 8 files, so 15 nodes total");
         System.out.println();
@@ -46,11 +46,15 @@ public class Driver {
             fileWriter.close();
         }
         catch(IOException e) {
+        	
             e.printStackTrace();
         }
+        gitRepository.updateLocal();
+        
+        
+        gitRepository.gitStatus();
 
         
-
 
         // System.out.println(local.treeSize(local.root()));
 

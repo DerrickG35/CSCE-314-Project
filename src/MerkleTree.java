@@ -86,10 +86,10 @@ public class MerkleTree {
 				e.printStackTrace();
 			}
         	
-        	
-    	}
-    	
+    	}	
     }
+    
+    
     
     
     // log base 2 operator
