@@ -24,34 +24,31 @@ import java.util.Arrays;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        
-
-        // building Merkle Tree: taking the hash of the initial files
+        // Building Git Repository
         GitRepository gitRepository = new GitRepository();
+        gitRepository.gitStatus();
 
-
-        
-        System.out.println("Printing out the concatenated hashes in pre Order traversal starting at the root");
-        System.out.println("There are currently 8 files, so 15 nodes total");
         System.out.println();
 
-        // Initial hash values stored in Merkle Tree
-
-        // Editing a file and rehashing keys in the Merkle Tree
-
+        System.out.println("Making local changes...");
         try {
             File editedFile = new File("projectFiles/a.txt");
+            File editedFile1 = new File("projectFiles/g.txt");
             FileWriter fileWriter = new FileWriter(editedFile, true);
+            FileWriter fileWriter1 = new FileWriter(editedFile1, true);
             fileWriter.write("\nCSCE 314 Project");
+            fileWriter1.write("hello world");
             fileWriter.close();
+            fileWriter1.close();
         }
         catch(IOException e) {
         	
             e.printStackTrace();
         }
+
         gitRepository.updateLocal();
-        
-        
+        gitRepository.gitStatus();
+        gitRepository.gitPush();
         gitRepository.gitStatus();
 
         

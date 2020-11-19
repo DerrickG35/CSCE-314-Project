@@ -9,19 +9,18 @@ public class GitRepository {
     private String[] contents;
 
     public GitRepository() {
-    	
     	directory = new File("projectFiles");
         contents = directory.list();
         Arrays.sort(contents);
         
         remote = new MerkleTree(contents);
         local = new MerkleTree(contents);
-           
+        System.out.println("Initializing local and remote branches\n");
     }
     
 
     public void gitStatus() {
-    	
+        System.out.println("Comparing local changes to remote repository");
     	InnerNode remoteRoot = remote.root();
     	InnerNode localRoot = local.root();
     	
@@ -56,7 +55,37 @@ public class GitRepository {
     }
 
     public void gitPush() {
-    	
+        System.out.println("Pushing files to remote repository");
+        InnerNode remoteRoot = remote.root();
+        InnerNode localRoot = local.root();
+        int numberOfFilesChanged = 0;
+
+        if (remoteRoot.getKey().equals(localRoot.getKey())) {
+            System.out.println("Everything up to date");
+        }
+        else {
+            numberOfFilesChanged = _gitPush(remoteRoot, localRoot);
+        }
+        System.out.println("Number of files changed: " + numberOfFilesChanged);
+    }
+
+    private int _gitPush(InnerNode remote, InnerNode local) {
+        if (local.getFile() != null) {
+
+            if(!(remote.getKey().equals(local.getKey()))) {
+                remote.setFile(local.getFile());
+                System.out.println("Added: " + local.getFile().getPath());
+                return 1;
+            }
+
+        }
+        else if (remote.getKey().equals(local.getKey())) {
+            return 0;
+        }
+        else {
+            return _gitPush(remote.getLeft(), local.getLeft()) + _gitPush(remote.getRight(), local.getRight());
+        }
+        return 0;
     }
     
     public void updateLocal() {
