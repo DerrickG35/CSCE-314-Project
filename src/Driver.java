@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class Driver {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
@@ -48,7 +47,11 @@ public class Driver {
 
         gitRepository.updateLocal();
         gitRepository.gitStatus();
+        
+        System.out.println();
         gitRepository.gitPush();
+        
+        System.out.println();
         gitRepository.gitStatus();
 
         

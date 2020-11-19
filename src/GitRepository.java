@@ -1,4 +1,5 @@
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class GitRepository {
@@ -54,7 +55,7 @@ public class GitRepository {
     	
     }
 
-    public void gitPush() {
+    public void gitPush() throws NoSuchAlgorithmException {
         System.out.println("Pushing files to remote repository");
         InnerNode remoteRoot = remote.root();
         InnerNode localRoot = local.root();
@@ -69,11 +70,13 @@ public class GitRepository {
         System.out.println("Number of files changed: " + numberOfFilesChanged);
     }
 
-    private int _gitPush(InnerNode remote, InnerNode local) {
+    private int _gitPush(InnerNode remote, InnerNode local) throws NoSuchAlgorithmException {
+    	
         if (local.getFile() != null) {
 
             if(!(remote.getKey().equals(local.getKey()))) {
                 remote.setFile(local.getFile());
+                remote.setKey(local.getKey());
                 System.out.println("Added: " + local.getFile().getPath());
                 return 1;
             }
@@ -83,7 +86,10 @@ public class GitRepository {
             return 0;
         }
         else {
-            return _gitPush(remote.getLeft(), local.getLeft()) + _gitPush(remote.getRight(), local.getRight());
+        	
+            int temp = _gitPush(remote.getLeft(), local.getLeft()) + _gitPush(remote.getRight(), local.getRight());
+            remote.createParentHash(remote.getLeft().getKey() + remote.getRight().getKey());
+            return temp;
         }
         return 0;
     }
