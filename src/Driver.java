@@ -44,8 +44,8 @@ public class Driver {
         	
             e.printStackTrace();
         }
-
         gitRepository.updateLocal();
+        
         gitRepository.gitStatus();
         
         System.out.println();
