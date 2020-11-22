@@ -1,19 +1,19 @@
-import java.security.NoSuchAlgorithmException;
-
 /*****************************************
-** File:    MerkleTree.java
-** Project: CSCE 314 Final Project, Fall 2020
-** Author:  Derrick Galindo, Manuel Trevino
-** Date:    11/7/2020
-** Section: 502, 501
-** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
-**
-**  This file contains the MerkleTree data structure.
-**	given the paths of all the files, it constructs
-**	a perfect binary tree with TreeFile nodes connected
-**	at the leaves of the Merkle Tree.
-**
-***********************************************/
+ ** File:    MerkleTree.java
+ ** Project: CSCE 314 Final Project, Fall 2020
+ ** Author:  Derrick Galindo, Manuel Trevino
+ ** Date:    11/7/2020
+ ** Section: 502, 501
+ ** E-mail:  derrickg@tamu.edu, manuelraul5@tamu.edu
+ **
+ **  This file contains the MerkleTree data structure.
+ **	given the paths of all the files, it constructs
+ **	a perfect binary tree with TreeFile nodes connected
+ **	at the leaves of the Merkle Tree.
+ **
+ ***********************************************/
+
+import java.security.NoSuchAlgorithmException;
 
 public class MerkleTree {
 	

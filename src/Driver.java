@@ -30,6 +30,7 @@ public class Driver {
         System.out.println();
 
         System.out.println("Making local changes...");
+
         try {
             File editedFile = new File("projectFiles/a.txt");
             File editedFile1 = new File("projectFiles/g.txt");
@@ -45,25 +46,19 @@ public class Driver {
             e.printStackTrace();
         }
 
+        /* Saving changes to the local Merkle Tree and checking the status. (Comparing it to the remote repository)
+          Since local changes have been made, the call to gitStatus should show us the files that have been modified. */
         gitRepository.updateLocal();
         gitRepository.gitStatus();
-        
+
+        // Pushing local changes
         System.out.println();
         gitRepository.gitPush();
-        
+
+        /* All local changes have already been pushed and no further changes have been made, so we should see a message
+         notifying us the repository is up to date. */
         System.out.println();
         gitRepository.gitStatus();
-
-        
-
-        // System.out.println(local.treeSize(local.root()));
-
-
-        // Deleting a file
-
-        // Adding a file
-
-
 
     }
 }
