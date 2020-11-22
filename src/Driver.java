@@ -30,7 +30,6 @@ public class Driver {
         System.out.println();
 
         System.out.println("Making local changes...");
-
         try {
             File editedFile = new File("projectFiles/a.txt");
             File editedFile1 = new File("projectFiles/g.txt");
