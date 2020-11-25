@@ -28,46 +28,109 @@ public class Driver {
 	
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
     	
-    	System.out.println("Run command prompt, Y or N: if no a demo will run");
     	
+    	GitRepository gitRepository = null;
+    	System.out.print("Run command prompt, Y or N: if no a demo will run ");
+    	String input = sc.nextLine().strip();
     	
+    	if(input.equals("Y")) {
+    		System.out.println("print out instructions here: ");
+    		while(true) {
+    			input = sc.nextLine().strip();
     	
+    			switch(input) {
+    				case "git init":
+    					gitRepository = new GitRepository();
+    					break;
+    					
+    				case "git status":
+    					
+    					try {
+    						gitRepository.gitStatus();
+    					} catch (Exception e) {
+    						System.out.println("Repository not initialized");
+    					}
+    					break;
+    					
+    				case "git push":
+    					try {
+    						gitRepository.gitPush();
+    					} catch (Exception e) {
+    						System.out.println("Repository not initialized");
+    					}
+    					break;
+    					
+    				case "git edit":
+    					break;
+    				
+    				case "quit":
+    					System.exit(0);
+    				
+    				default:
+    					System.out.println("Please type a valid command, type \"help\" to see commands");
+    					
+    			}
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    		}
+    		
+    		
+    		
+    		
+    	}
+    	else {
+ 
+    		System.out.println("Running git repository demo");
+    		
+            // Building Git Repository
+            gitRepository = new GitRepository();
+            gitRepository.gitStatus();
+
+            System.out.println();
+
+            System.out.println("Making local changes...");
+            try {
+                File editedFile = new File("projectFiles/a.txt");
+                File editedFile1 = new File("projectFiles/g.txt");
+                FileWriter fileWriter = new FileWriter(editedFile, true);
+                FileWriter fileWriter1 = new FileWriter(editedFile1, true);
+                fileWriter.write("\nCSCE 314 Project");
+                fileWriter1.write("hello world");
+                fileWriter.close();
+                fileWriter1.close();
+            }
+            catch(IOException e) {
+            	
+                e.printStackTrace();
+            }
+
+            /* Saving changes to the local Merkle Tree and checking the status. (Comparing it to the remote repository)
+              Since local changes have been made, the call to gitStatus should show us the files that have been modified. */
+            gitRepository.updateLocal();
+            gitRepository.gitStatus();
+
+            // Pushing local changes
+            System.out.println();
+            gitRepository.gitPush();
+
+            /* All local changes have already been pushed and no further changes have been made, so we should see a message
+             notifying us the repository is up to date. */
+            System.out.println();
+            gitRepository.gitStatus();
+    		
+    		
+    		
+    	}
     	
-        // Building Git Repository
-        GitRepository gitRepository = new GitRepository();
-        gitRepository.gitStatus();
-
-        System.out.println();
-
-        System.out.println("Making local changes...");
-        try {
-            File editedFile = new File("projectFiles/a.txt");
-            File editedFile1 = new File("projectFiles/g.txt");
-            FileWriter fileWriter = new FileWriter(editedFile, true);
-            FileWriter fileWriter1 = new FileWriter(editedFile1, true);
-            fileWriter.write("\nCSCE 314 Project");
-            fileWriter1.write("hello world");
-            fileWriter.close();
-            fileWriter1.close();
-        }
-        catch(IOException e) {
-        	
-            e.printStackTrace();
-        }
-
-        /* Saving changes to the local Merkle Tree and checking the status. (Comparing it to the remote repository)
-          Since local changes have been made, the call to gitStatus should show us the files that have been modified. */
-        gitRepository.updateLocal();
-        gitRepository.gitStatus();
-
-        // Pushing local changes
-        System.out.println();
-        gitRepository.gitPush();
-
-        /* All local changes have already been pushed and no further changes have been made, so we should see a message
-         notifying us the repository is up to date. */
-        System.out.println();
-        gitRepository.gitStatus();
 
     }
 }
