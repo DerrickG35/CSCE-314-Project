@@ -68,7 +68,7 @@ public class Driver {
     					System.out.println("Enter the name of the file to edit: ");
     					input = sc.nextLine().strip();
     					boolean result = false;
-    					String fileName = "projectFiles\\" + input;
+    					String fileName = input;
     					System.out.println(fileName);
     					
     					try {
