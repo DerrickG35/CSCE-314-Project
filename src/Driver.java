@@ -69,9 +69,10 @@ public class Driver {
     					input = sc.nextLine().strip();
     					boolean result = false;
     					String fileName = "projectFiles\\" + input;
+    					System.out.println(fileName);
     					
     					try {
-    						result = gitRepository.inContents(input);
+    						result = gitRepository.inContents(fileName);
     					} catch (Exception e) {
     						System.out.println("Repository not initialized");
     						break;
@@ -82,7 +83,7 @@ public class Driver {
     						break;
     					}
     					
-    					System.out.println("editing file, type \"STOP\" to save and exit file eiditing. \n");
+    					System.out.println("editing file, type \"STOP\" to save. \n");
     					
     					while(true) {
     						input = sc.nextLine().strip();
@@ -94,6 +95,8 @@ public class Driver {
     					}
     					EditFile file = new EditFile(fileName, userInput);
     					file.writeToFile();
+    					gitRepository.updateLocal();
+    					System.out.println("Saving changes and exiting file. \n");
     					break;
     				
     				case "quit":

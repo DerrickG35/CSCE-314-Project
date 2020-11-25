@@ -162,6 +162,7 @@ public class GitRepository {
     }
     
     public boolean inContents(String file) {
+
     	for(String checkFile: contents) {
     		if (checkFile.equals(file)) {
     			return true;
