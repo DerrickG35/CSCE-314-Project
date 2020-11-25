@@ -14,12 +14,13 @@
  ***********************************************/
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class MerkleTree {
 	
 	
     private InnerNode root;
-    private String paths[];
+    private ArrayList<String> paths;
     private int depth;
     private int cFileIndex;
     
@@ -29,10 +30,10 @@ public class MerkleTree {
     // Name: MerkleTree, constructor
     // PostCondition: constructs a perfect binary tree
     //---------------------------------------------------------
-    public MerkleTree(String[] paths) {
+    public MerkleTree(ArrayList<String> paths) {
         this.root = new InnerNode();
         this.paths = paths;
-        this.depth = log2(paths.length);
+        this.depth = log2(paths.size());
         this.cFileIndex = 0;
         
         buildTree(0,root);
@@ -51,13 +52,13 @@ public class MerkleTree {
     		
     		// if all files already attached, then continue attaching the last one.
     		// else attach the correct file and move index by 1
-    		if (cFileIndex >= paths.length) {
+    		if (cFileIndex >= paths.size()) {
     			
-    			current.setFile(new TreeFile(paths[paths.length-1]));
+    			current.setFile(new TreeFile(paths.get(paths.size()-1)));
     		}
     		else {
     		
-	    		current.setFile(new TreeFile(paths[cFileIndex]));
+	    		current.setFile(new TreeFile(paths.get(cFileIndex)));
 	    		cFileIndex += 1;
     		}
     		

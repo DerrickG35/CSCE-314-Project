@@ -24,7 +24,6 @@ public class TreeFile extends Node {
 	public TreeFile(String path) {
 
 		// Gets the entire String path and is then converted to a Path object
-		path = "projectFiles/" + path;
 		this.path = Path.of(path);
 		
 		try {
