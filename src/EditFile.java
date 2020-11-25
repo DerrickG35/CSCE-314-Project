@@ -18,8 +18,9 @@ public class EditFile {
     public void writeToFile() throws IOException {
         try {
             for (String input : userInput) {
-                fileWriter.write(input);
+                fileWriter.write("\n" + input);
             }
+            fileWriter.close();
         }
         catch(IOException e) {
             e.printStackTrace();

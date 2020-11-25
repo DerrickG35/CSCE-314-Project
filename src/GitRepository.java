@@ -32,7 +32,7 @@ public class GitRepository {
 
         remote = new MerkleTree(getContents());
         local = new MerkleTree(getContents());
-        System.out.println("Initializing local and remote branches\n");
+        System.out.println("Initializing local and remote branches");
     }
     
     //-------------------------------------------------------
@@ -159,6 +159,16 @@ public class GitRepository {
             contents.add(currFile.getPath());
         }
         Collections.sort(contents);
+    }
+    
+    public boolean inContents(String file) {
+
+    	for(String checkFile: contents) {
+    		if (checkFile.equals(file)) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     
