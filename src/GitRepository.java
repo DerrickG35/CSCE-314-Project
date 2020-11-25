@@ -14,22 +14,24 @@
 
 import java.io.File;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class GitRepository {
 	
     private MerkleTree remote;
     private MerkleTree local;
     private File directory;
-    private String[] contents;
+    private ArrayList<String> contents = new ArrayList<String>();
 
     public GitRepository() {
     	directory = new File("projectFiles");
-        contents = directory.list();
-        Arrays.sort(contents);
-        
-        remote = new MerkleTree(contents);
-        local = new MerkleTree(contents);
+        File[] files = directory.listFiles();
+        setContents(files);
+
+        remote = new MerkleTree(getContents());
+        local = new MerkleTree(getContents());
         System.out.println("Initializing local and remote branches\n");
     }
     
@@ -146,6 +148,17 @@ public class GitRepository {
     	remote.treeSize(remote.root());
     	System.out.println();
     	local.treeSize(local.root());
+    }
+
+    public ArrayList<String> getContents() {
+        return contents;
+    }
+
+    public void setContents(File[] files) {
+        for(File currFile : files) {
+            contents.add(currFile.getPath());
+        }
+        Collections.sort(contents);
     }
     
     
