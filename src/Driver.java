@@ -67,18 +67,17 @@ public class Driver {
     					ArrayList<String> userInput = new ArrayList<String>();
     					System.out.println("Enter the name of the file to edit: ");
     					input = sc.nextLine().strip();
-    					boolean result = false;
-    					String fileName = input;
-    					System.out.println(fileName);
+
+    					String fileName = null;
     					
     					try {
-    						result = gitRepository.inContents(fileName);
+    						fileName = gitRepository.inContents(input);
     					} catch (Exception e) {
     						System.out.println("Repository not initialized");
     						break;
     					}
     					
-    					if (!result) {
+    					if (fileName.equals(null)) {
     						System.out.println("file not in system, run \"git {command}\" to create a file ");
     						break;
     					}

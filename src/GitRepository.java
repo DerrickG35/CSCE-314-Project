@@ -161,17 +161,15 @@ public class GitRepository {
         Collections.sort(contents);
     }
     
-    public boolean inContents(String file) {
+    public String inContents(String file) {
     	
-    	String fileName1 = "projectFiles\\" + file;
-    	String fileName2 = "projectFile/" + file;
     	
     	for(String checkFile: contents) {
-    		if (checkFile.equals(fileName1) || checkFile.equals(fileName2)) {
-    			return true;
+    		if (checkFile.contains(file)) {
+    			return checkFile;
     		}
     	}
-    	return false;
+    	return null;
     }
     
     
