@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
@@ -38,6 +39,7 @@ public class Driver {
     		while(true) {
     			input = sc.nextLine().strip();
     	
+    			
     			switch(input) {
     				case "git init":
     					gitRepository = new GitRepository();
@@ -61,6 +63,37 @@ public class Driver {
     					break;
     					
     				case "git edit":
+    					
+    					ArrayList<String> userInput = new ArrayList<String>();
+    					System.out.println("Enter the name of the file to edit: ");
+    					input = sc.nextLine().strip();
+    					boolean result = false;
+    					String fileName = "projectFiles\\" + input;
+    					
+    					try {
+    						result = gitRepository.inContents(input);
+    					} catch (Exception e) {
+    						System.out.println("Repository not initialized");
+    						break;
+    					}
+    					
+    					if (!result) {
+    						System.out.println("file not in system, run \"git {command}\" to create a file ");
+    						break;
+    					}
+    					
+    					System.out.println("editing file, type \"STOP\" to save and exit file eiditing. \n");
+    					
+    					while(true) {
+    						input = sc.nextLine().strip();
+    						if(input.equals("STOP")) {
+    							break;
+    						} else {
+    							userInput.add(input);
+    						}
+    					}
+    					EditFile file = new EditFile(fileName, userInput);
+    					file.writeToFile();
     					break;
     				
     				case "quit":
