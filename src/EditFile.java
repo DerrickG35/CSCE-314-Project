@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditFile {
-    File file;
-    FileWriter fileWriter;
-    ArrayList<String> userInput = new ArrayList<String>();
+    private String filepath;
+    private FileWriter fileWriter;
+    private ArrayList<String> userInput = new ArrayList<String>();
 
-    public EditFile(File file, ArrayList<String> userInput) throws IOException {
-        this.file = file;
+    public EditFile(String filepath, ArrayList<String> userInput) throws IOException {
+        File file = new File(filepath);
+        this.filepath = filepath;
         this.userInput = userInput;
         this.fileWriter = new FileWriter(file, true);
     }
