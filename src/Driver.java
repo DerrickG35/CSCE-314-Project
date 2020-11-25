@@ -20,9 +20,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public class Driver {
+	
+	private static Scanner sc = new Scanner(System.in);
+	
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+    	
+    	System.out.println("Run command prompt, Y or N: if no a demo will run");
+    	
+    	
+    	
+    	
         // Building Git Repository
         GitRepository gitRepository = new GitRepository();
         gitRepository.gitStatus();
