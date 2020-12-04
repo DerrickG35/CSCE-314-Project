@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class GitRepository {
 	
@@ -24,6 +25,7 @@ public class GitRepository {
     private MerkleTree local;
     private File directory;
     private ArrayList<String> contents = new ArrayList<String>();
+    private HashSet<String> deleted = new HashSet<String>();
 
     public GitRepository() {
     	directory = new File("projectFiles");

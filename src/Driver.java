@@ -54,6 +54,8 @@ public class Driver {
     					}
     					break;
     					
+    					
+    					
     				case "git push":
     					try {
     						gitRepository.gitPush();
@@ -61,6 +63,9 @@ public class Driver {
     						System.out.println("Repository not initialized");
     					}
     					break;
+    					
+    					
+    					
     					
     				case "git edit":
     					
@@ -92,11 +97,32 @@ public class Driver {
     							userInput.add(input);
     						}
     					}
+    					
     					EditFile file = new EditFile(fileName, userInput);
     					file.writeToFile();
     					gitRepository.updateLocal();
     					System.out.println("Saving changes and exiting file. \n");
     					break;
+    					
+    				case "git addfile":
+    					
+    					if (gitRepository == null) {
+    						System.out.println("Repository not initialized");
+    					}
+    					else {
+    						System.out.println("Enter the name of the new file: ");
+        					input = sc.nextLine().strip();
+        					
+        					fileName = gitRepository.inContents(input);
+        					if (fileName != null) {
+        						System.out.println("File is already in the system.");
+        						break;
+        					}
+        					
+        					
+        					CreateFile temp = new CreateFile("projectFiles" + input);
+    					}
+    					
     				
     				case "quit":
     					System.exit(0);
