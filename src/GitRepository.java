@@ -26,6 +26,7 @@ public class GitRepository {
     private File directory;
     private ArrayList<String> contents = new ArrayList<String>();
     private HashSet<String> deleted = new HashSet<String>();
+    private HashSet<String> added = new HashSet<String>();
 
     public GitRepository() {
     	directory = new File("projectFiles");
@@ -172,6 +173,11 @@ public class GitRepository {
     		}
     	}
     	return null;
+    }
+    
+    
+    public File getDirectory() {
+    	return this.directory;
     }
     
     

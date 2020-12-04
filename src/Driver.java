@@ -104,6 +104,8 @@ public class Driver {
     					System.out.println("Saving changes and exiting file. \n");
     					break;
     					
+    					
+    					
     				case "git addfile":
     					
     					if (gitRepository == null) {
@@ -120,7 +122,8 @@ public class Driver {
         					}
         					
         					
-        					CreateFile temp = new CreateFile("projectFiles" + input);
+        					System.out.println(gitRepository.getDirectory().getPath());
+        					CreateFile temp1 = new CreateFile("projectFiles/" + input);
     					}
     					
     				
