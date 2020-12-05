@@ -100,6 +100,8 @@ public class Driver {
     					
     					EditFile file = new EditFile(fileName, userInput);
     					file.writeToFile();
+    					
+    					System.out.println("Hello");
     					gitRepository.updateLocal();
     					System.out.println("Saving changes and exiting file. \n");
     					break;
