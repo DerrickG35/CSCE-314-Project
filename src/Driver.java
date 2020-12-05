@@ -35,12 +35,14 @@ public class Driver {
     	String input = sc.nextLine().strip();
     	
     	if(input.equals("Y")) {
+    		
     		System.out.println("Run git init to initilize your repository, type help for commands\n");
+    		// command prompt emulator
     		while(true) {
     			input = sc.nextLine().strip();
     	
-    			
     			switch(input) {
+    			
     				case "git init":
     					gitRepository = new GitRepository();
     					break;
@@ -53,9 +55,7 @@ public class Driver {
     						System.out.println("Repository not initialized");
     					}
     					break;
-    					
-    					
-    					
+    						
     				case "git push":
     					try {
     						gitRepository.gitPush();
@@ -63,8 +63,7 @@ public class Driver {
     						System.out.println("Repository not initialized");
     					}
     					break;
-    					
-    						
+    							
     				case "git edit":
     					
     					ArrayList<String> userInput = new ArrayList<String>();
@@ -106,9 +105,7 @@ public class Driver {
     					
     					System.out.println("Saving changes and exiting file.");
     					break;
-    					
-    					
-    					
+    						
     				case "git add":
     					
     					if (gitRepository == null) {
@@ -144,9 +141,7 @@ public class Driver {
 							gitRepository.gitRemove("projectFiles/" + input);
 						}
 						break;
-
-
-    				
+	
     				case "quit":
     					System.exit(0);
     					
@@ -158,6 +153,7 @@ public class Driver {
     					System.out.println("git edit - edit a file, type STOP when done");
     					System.out.println("git add - add a file to local directory");
     					System.out.println("git remove - remove a file from local directory");
+    					break;
     				
     				default:
     					System.out.println("Please type a valid command, type \"help\" to see commands");
@@ -168,12 +164,9 @@ public class Driver {
     			
     		}
     		
-    		
-    		
-    		
     	}
     	else {
- 
+    		
     		System.out.println("Running git repository demo");
     		
             // Building Git Repository
@@ -211,11 +204,8 @@ public class Driver {
              notifying us the repository is up to date. */
             System.out.println();
             gitRepository.gitStatus();
-    		
-    		
-    		
+    			
     	}
     	
-
     }
 }

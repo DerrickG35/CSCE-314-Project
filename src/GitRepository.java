@@ -183,12 +183,9 @@ public class GitRepository {
     }
     
     
-    // updates local merkle tree to reflect the changes made to the files
+    // updates local Merkle tree to reflect the changes made to the files
     public void updateLocal() {
-    	
-    	
     	local = new MerkleTree(contents);
-    	
     }
     
     
@@ -198,11 +195,13 @@ public class GitRepository {
     	System.out.println();
     	local.treeSize(local.root());
     }
-
+    
     public ArrayList<String> getContents() {
         return contents;
     }
-
+    
+    
+    // sets contents array to file paths
     public void setContents(File[] files) {
 
         for(File currFile : files) {
@@ -211,6 +210,8 @@ public class GitRepository {
         Collections.sort(contents);
     }
     
+    
+    // sets contents1 array to file paths
     public void setContents1(File[] files) {
 
     	contents1.clear();
@@ -220,6 +221,8 @@ public class GitRepository {
         Collections.sort(contents1);
     }
     
+    
+    // returns path of a file if file is in contents array
     public String inContents(String file) {
     	
     	for(String checkFile : contents) {
@@ -270,9 +273,8 @@ public class GitRepository {
     }
     
     
+    // returns true if a given file is in the deleted or added hash set.
     public boolean checkHashSets(String filename) {
-    
-    	
 		filename = mW(filename);
 		
 		if ( added.contains(filename) || deleted.contains(filename)) {
@@ -282,7 +284,8 @@ public class GitRepository {
     	return false;
     }
 
-
+    
+    // converts Windows directory path to macOS
 	public String mW (String filename) {
 		String[] name = filename.split("\\\\");
 		if(name.length == 2) {
