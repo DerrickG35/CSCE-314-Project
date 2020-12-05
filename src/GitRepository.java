@@ -238,9 +238,16 @@ public class GitRepository {
     	}
     	return null;
     }
-    
-    
 
+
+    //---------------------------------------------------------------------
+    // Name: gitAdd()
+    // PreCondition:  Takes in a path to a file
+    // PostCondition: Creates a files from the given string parameter, updates
+    //                the hash sets to keep track of new files, and adds it to a
+    //                directory that keeps track of files to be added to the remote
+    //                repository.
+    //----------------------------------------------------------------------
     public void gitAdd(String filename) throws IOException {
     	
     	added.add(filename);
@@ -257,6 +264,13 @@ public class GitRepository {
         }
     }
 
+    //---------------------------------------------------------------------
+    // Name: gitRemove()
+    // PreCondition:  Takes in a path to a file
+    // PostCondition: Deletes a file from the given string parameter, updates
+    //                the hash sets to keep track of deleted files, and removes
+    //                it from the directory.
+    //---------------------------------------------------------------------
     public void gitRemove(String filename) throws IOException {
     	
     	deleted.add(filename);
