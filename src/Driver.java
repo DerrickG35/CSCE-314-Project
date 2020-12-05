@@ -153,6 +153,7 @@ public class Driver {
     					System.out.println("git edit - edit a file, type STOP when done");
     					System.out.println("git add - add a file to local directory");
     					System.out.println("git remove - remove a file from local directory");
+						System.out.println("quit - ends the demo");
     					break;
     				
     				default:
