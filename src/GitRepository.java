@@ -211,6 +211,7 @@ public class GitRepository {
         catch (IOException e) {
             System.out.println("Error occurred when creating " + filename);
         }
+        added.add(filename);
     }
 
     public void gitRemove(String filename) throws IOException {
