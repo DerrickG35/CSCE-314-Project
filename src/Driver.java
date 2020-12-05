@@ -31,11 +31,11 @@ public class Driver {
     	
     	
     	GitRepository gitRepository = null;
-    	System.out.print("Run command prompt, Y or N: if no a demo will run ");
+    	System.out.print("Type Y for command prompt. If not, a demo will run ");
     	String input = sc.nextLine().strip();
     	
     	if(input.equals("Y")) {
-    		System.out.println("print out instructions here: ");
+    		System.out.println("Run git init to initilize your repository, type help for commands\n");
     		while(true) {
     			input = sc.nextLine().strip();
     	
@@ -64,9 +64,7 @@ public class Driver {
     					}
     					break;
     					
-    					
-    					
-    					
+    						
     				case "git edit":
     					
     					ArrayList<String> userInput = new ArrayList<String>();
@@ -83,11 +81,11 @@ public class Driver {
     					}
     					
     					if (fileName == null) {
-    						System.out.println("file not in system, run \"git {command}\" to create a file ");
+    						System.out.println("file not in system, run \"git add\" to create a file ");
     						break;
     					}
     					
-    					System.out.println("editing file, type \"STOP\" to save. \n");
+    					System.out.println("\nediting file, type \"STOP\" to save.");
     					
     					while(true) {
     						input = sc.nextLine().strip();
@@ -101,10 +99,12 @@ public class Driver {
     					EditFile file = new EditFile(fileName, userInput);
     					file.writeToFile();
     					
-    					System.out.println("Hello");
     					
-    					gitRepository.updateLocal();
-    					System.out.println("Saving changes and exiting file. \n");
+    					if(!gitRepository.checkHashSets(fileName)) {
+    						gitRepository.updateLocal();
+    					}
+    					
+    					System.out.println("Saving changes and exiting file.");
     					break;
     					
     					
@@ -125,8 +125,8 @@ public class Driver {
         					}
 
         					gitRepository.gitAdd("projectFiles/" + input);
-        					break;
     					}
+    					break;
 
 					case "git remove":
 						if (gitRepository == null) {
@@ -142,28 +142,29 @@ public class Driver {
 								break;
 							}
 							gitRepository.gitRemove("projectFiles/" + input);
-							break;
 						}
+						break;
 
 
     				
     				case "quit":
     					System.exit(0);
+    					
+    				case "help":
+    					System.out.println("commands:");
+    					System.out.println("git init - initialize local and remote repositories");
+    					System.out.println("git status - compare local changes to remote repository");
+    					System.out.println("git push - push changes to remote repository");
+    					System.out.println("git edit - edit a file, type STOP when done");
+    					System.out.println("git add - add a file to local directory");
+    					System.out.println("git remove - remove a file from local directory");
     				
     				default:
     					System.out.println("Please type a valid command, type \"help\" to see commands");
     					
     			}
     			
-    			
-    			
-    			
-    			
-    			
-    			
-    			
-    			
-    			
+    			System.out.println();
     			
     		}
     		

@@ -27,6 +27,7 @@ public class GitRepository {
     private MerkleTree local;
     private File directory;
     private ArrayList<String> contents = new ArrayList<String>();
+    private ArrayList<String> contents1 = new ArrayList<String>();
     private HashSet<String> deleted = new HashSet<String>();
     private HashSet<String> added = new HashSet<String>();
 
@@ -59,6 +60,7 @@ public class GitRepository {
     		_gitStatus(remoteRoot, localRoot);
     		
     		
+    	
     		for(String name: added) {
     			System.out.println("added: " + name);
     		}
@@ -84,16 +86,14 @@ public class GitRepository {
     		
     		if(!(remote.getKey().equals(local.getKey()))) {
     			
-    			String path = local.getFile().getPath().toString();
-    			String[] name = path.split("\\|/");
-    			path = name[0] + "/" + name[1];
+    			String path = mW(local.getFile().getPath().toString());
     			
     			if(deleted.contains(path)) {
     				return;
     			}
     			
     			
-    			System.out.println("modified: " + local.getFile().getPath());
+    			System.out.println("modified: " + mW(local.getFile().getPath().toString()));
     		}
     		
     	}
@@ -119,13 +119,36 @@ public class GitRepository {
         InnerNode localRoot = local.root();
         int numberOfFilesChanged = 0;
 
-        if (remoteRoot.getKey().equals(localRoot.getKey())) {
+        if (remoteRoot.getKey().equals(localRoot.getKey()) && added.size() == 0 && deleted.size() == 0) {
             System.out.println("Everything up to date");
         }
         else {
+        	
+        	
             numberOfFilesChanged = _gitPush(remoteRoot, localRoot);
+            
+            // only building remote tree when a file was added or removed
+            if(added.size() != 0 || deleted.size() != 0) {
+            	contents.clear();
+            	for (String filename: contents1) {
+            		contents.add(filename);
+            	}
+            	updateLocal();
+            	remote = new MerkleTree(contents);
+            	
+            	contents1.clear();
+            }
+            
+            for(String name: added) {
+    			System.out.println("added: " + name);
+    		}
+    		for(String name: deleted) {
+    			System.out.println("deleted: " + name);
+    		}
         }
-        System.out.println("Number of files changed: " + numberOfFilesChanged);
+        System.out.println("Number of files changed: " + (numberOfFilesChanged + deleted.size() + added.size()));
+        added.clear();
+        deleted.clear();
     }
 
     //-------------------------------------------------------
@@ -142,7 +165,7 @@ public class GitRepository {
             if(!(remote.getKey().equals(local.getKey()))) {
                 remote.setFile(local.getFile());
                 remote.setKey(local.getKey());
-                System.out.println("Added: " + local.getFile().getPath());
+                System.out.println("added: " + mW(local.getFile().getPath().toString()));
                 return 1;
             }
 
@@ -163,6 +186,7 @@ public class GitRepository {
     // updates local merkle tree to reflect the changes made to the files
     public void updateLocal() {
     	
+    	
     	local = new MerkleTree(contents);
     	
     }
@@ -181,15 +205,30 @@ public class GitRepository {
 
     public void setContents(File[] files) {
 
-        contents.clear();
         for(File currFile : files) {
             contents.add(currFile.getPath());
         }
         Collections.sort(contents);
     }
     
+    public void setContents1(File[] files) {
+
+    	contents1.clear();
+        for(File currFile : files) {
+            contents1.add(currFile.getPath());
+        }
+        Collections.sort(contents1);
+    }
+    
     public String inContents(String file) {
+    	
     	for(String checkFile : contents) {
+    		if (checkFile.contains(file)) {
+    			return checkFile;
+    		}
+    	}
+    	
+    	for(String checkFile : contents1) {
     		if (checkFile.contains(file)) {
     			return checkFile;
     		}
@@ -198,16 +237,17 @@ public class GitRepository {
     }
     
     
-    public File getDirectory() {
-    	return this.directory;
-    }
 
     public void gitAdd(String filename) throws IOException {
+    	
+    	added.add(filename);
+    	deleted.remove(filename);
+    	
         File newFile = new File(filename);
         try {
             newFile.createNewFile();
             System.out.println("File added: " + filename);
-            setContents(directory.listFiles());
+            setContents1(directory.listFiles());
         }
         catch (IOException e) {
             System.out.println("Error occurred when creating " + filename);
@@ -215,26 +255,25 @@ public class GitRepository {
     }
 
     public void gitRemove(String filename) throws IOException {
+    	
+    	deleted.add(filename);
+    	added.remove(filename);
+    	
         try {
             Files.delete(Path.of(filename));
             System.out.println("File removed: " + filename);
-            setContents(directory.listFiles());
+            setContents1(directory.listFiles());
         }
         catch (IOException e) {
             System.out.println("Failed to delete file");
         }
     }
     
-    public void contents() {
-    	for(String mystring: contents) {
-    		System.out.println(mystring);
-    	}
-    }
     
     public boolean checkHashSets(String filename) {
+    
     	
-		String[] name = filename.split("\\|/");
-		filename = name[0] + "/" + name[1];
+		filename = mW(filename);
 		
 		if ( added.contains(filename) || deleted.contains(filename)) {
 			return true;
@@ -242,4 +281,14 @@ public class GitRepository {
     	
     	return false;
     }
+
+
+	public String mW (String filename) {
+		String[] name = filename.split("\\\\");
+		if(name.length == 2) {
+			filename = name[0] + "/" + name[1];
+		}
+		return filename;
+	}
+	
 }
