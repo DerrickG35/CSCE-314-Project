@@ -196,6 +196,8 @@ public class GitRepository {
     public void gitRemove(String filename) throws IOException {
         try {
             Files.delete(Path.of(filename));
+            System.out.println("File removed: " + filename);
+
         }
         catch (IOException e) {
             System.out.println("Failed to delete file");
