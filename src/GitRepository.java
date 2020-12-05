@@ -180,7 +180,8 @@ public class GitRepository {
     }
 
     public void setContents(File[] files) {
-    
+
+        contents.clear();
         for(File currFile : files) {
             contents.add(currFile.getPath());
         }
@@ -188,8 +189,6 @@ public class GitRepository {
     }
     
     public String inContents(String file) {
-    	
-    	
     	for(String checkFile : contents) {
     		if (checkFile.contains(file)) {
     			return checkFile;
@@ -208,18 +207,18 @@ public class GitRepository {
         try {
             newFile.createNewFile();
             System.out.println("File added: " + filename);
+            setContents(directory.listFiles());
         }
         catch (IOException e) {
             System.out.println("Error occurred when creating " + filename);
         }
-        added.add(filename);
     }
 
     public void gitRemove(String filename) throws IOException {
         try {
             Files.delete(Path.of(filename));
             System.out.println("File removed: " + filename);
-
+            setContents(directory.listFiles());
         }
         catch (IOException e) {
             System.out.println("Failed to delete file");

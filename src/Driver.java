@@ -82,7 +82,7 @@ public class Driver {
     						break;
     					}
     					
-    					if (fileName.equals(null)) {
+    					if (fileName == null) {
     						System.out.println("file not in system, run \"git {command}\" to create a file ");
     						break;
     					}
