@@ -180,6 +180,7 @@ public class GitRepository {
     }
 
     public void setContents(File[] files) {
+    
         for(File currFile : files) {
             contents.add(currFile.getPath());
         }
@@ -225,5 +226,21 @@ public class GitRepository {
         }
     }
     
+    public void contents() {
+    	for(String mystring: contents) {
+    		System.out.println(mystring);
+    	}
+    }
     
+    public boolean checkHashSets(String filename) {
+    	
+		String[] name = filename.split("\\|/");
+		filename = name[0] + "/" + name[1];
+		
+		if ( added.contains(filename) || deleted.contains(filename)) {
+			return true;
+		}
+    	
+    	return false;
+    }
 }
