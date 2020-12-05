@@ -134,7 +134,7 @@ public class Driver {
 							input = sc.nextLine().strip();
 
 							fileName = gitRepository.inContents(input);
-							if (fileName != null) {
+							if (fileName == null) {
 								System.out.println("File does not exist in the system.");
 								break;
 							}
