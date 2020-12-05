@@ -122,8 +122,10 @@ public class Driver {
         					}
         					
         					
+        					
         					System.out.println(gitRepository.getDirectory().getPath());
         					CreateFile temp1 = new CreateFile("projectFiles/" + input);
+        					break;
     					}
     					
     				

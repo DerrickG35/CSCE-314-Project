@@ -48,11 +48,21 @@ public class GitRepository {
     	InnerNode remoteRoot = remote.root();
     	InnerNode localRoot = local.root();
     	
-    	if (remoteRoot.getKey().equals(localRoot.getKey())) {
+    	if (remoteRoot.getKey().equals(localRoot.getKey()) && added.size() == 0 && deleted.size() == 0) {
     		System.out.println("Everything up to date");
     	}
     	else {
+    		
+    		// calls recursive statement for git status, comparing the hash values in the trees
     		_gitStatus(remoteRoot, localRoot);
+    		
+    		
+    		for(String name: added) {
+    			System.out.println("added: " + name);
+    		}
+    		for(String name: deleted) {
+    			System.out.println("deleted: " + name);
+    		}
     	}
     	
     	
@@ -71,6 +81,16 @@ public class GitRepository {
     	if (local.getFile() != null) {
     		
     		if(!(remote.getKey().equals(local.getKey()))) {
+    			
+    			String path = local.getFile().getPath().toString();
+    			String[] name = path.split("\\|/");
+    			path = name[0] + "/" + name[1];
+    			
+    			if(deleted.contains(path)) {
+    				return;
+    			}
+    			
+    			
     			System.out.println("modified: " + local.getFile().getPath());
     		}
     		
