@@ -13,9 +13,11 @@
  ***********************************************/
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -167,7 +169,7 @@ public class GitRepository {
     public String inContents(String file) {
     	
     	
-    	for(String checkFile: contents) {
+    	for(String checkFile : contents) {
     		if (checkFile.contains(file)) {
     			return checkFile;
     		}
@@ -179,7 +181,26 @@ public class GitRepository {
     public File getDirectory() {
     	return this.directory;
     }
-    
+
+    public void gitAdd(String filename) throws IOException {
+        File newFile = new File(filename);
+        try {
+            newFile.createNewFile();
+            System.out.println("File added: " + filename);
+        }
+        catch (IOException e) {
+            System.out.println("Error occurred when creating " + filename);
+        }
+    }
+
+    public void gitRemove(String filename) throws IOException {
+        try {
+            Files.delete(Path.of(filename));
+        }
+        catch (IOException e) {
+            System.out.println("Failed to delete file");
+        }
+    }
     
     
 }

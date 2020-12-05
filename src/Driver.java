@@ -106,7 +106,7 @@ public class Driver {
     					
     					
     					
-    				case "git addfile":
+    				case "git add":
     					
     					if (gitRepository == null) {
     						System.out.println("Repository not initialized");
@@ -120,12 +120,28 @@ public class Driver {
         						System.out.println("File is already in the system.");
         						break;
         					}
-        					
-        					
-        					System.out.println(gitRepository.getDirectory().getPath());
-        					CreateFile temp1 = new CreateFile("projectFiles/" + input);
+        					gitRepository.gitAdd("projectFiles/" + input);
+        					break;
     					}
-    					
+
+					case "git remove":
+						if (gitRepository == null) {
+							System.out.println("Repository not initialized");
+						}
+						else {
+							System.out.println("Enter the name of the file to be deleted: ");
+							input = sc.nextLine().strip();
+
+							fileName = gitRepository.inContents(input);
+							if (fileName != null) {
+								System.out.println("File does not exist in the system.");
+								break;
+							}
+							gitRepository.gitRemove("projectFiles/" + input);
+							break;
+						}
+
+
     				
     				case "quit":
     					System.exit(0);
